@@ -29,3 +29,4 @@ The Open Super-large Crawled ALMAnaCH coRpus is a huge multilingual corpus obtai
 * Model [configs](./hebrew-gpt_neo-tiny/configs) <BR>
 * Available on [Huggingface](https://huggingface.co/Norod78/hebrew-gpt_neo-tiny) <BR>
 * A Google Colab Notebook is available [here ](https://colab.research.google.com/github/Norod/hebrew-gpt_neo/blob/main/hebrew-gpt_neo-tiny/Norod78_hebrew_gpt_neo_tiny_Colab.ipynb) <BR>
+* A demo website, running slow CPU inference can be [found here](https://tiny.e-gayon.com)
