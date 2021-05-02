@@ -1,0 +1,3 @@
+gcloud config set project deep-learning-253814 
+gcloud config set compute/zone europe-west4-a
+gcloud config set compute/region europe-west4

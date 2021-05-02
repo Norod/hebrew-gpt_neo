@@ -1,0 +1,1 @@
+python3 main.py --model Hebrew_GPT2_tiny --check_dataset

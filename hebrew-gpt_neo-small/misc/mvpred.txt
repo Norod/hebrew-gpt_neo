@@ -1,0 +1,1 @@
+gsutil mv ./predictions*.txt gs://dadler_gptneo_europe-west4/predictions/Hebrew_GPT3_SMALL/

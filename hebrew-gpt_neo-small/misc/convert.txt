@@ -1,0 +1,1 @@
+python ./transformers/src/transformers/models/gpt_neo/convert_gpt_neo_mesh_tf_to_pytorch.py  --tf_checkpoint_path ./Hebrew_GPT3_SMALL --pytorch_dump_path ./hebrew-gpt_neo-small --config_file ./Hebrew_GPT3_small_256.json

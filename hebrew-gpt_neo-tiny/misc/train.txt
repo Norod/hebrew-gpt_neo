@@ -1,0 +1,1 @@
+python3 main.py --model Hebrew_GPT2_tiny --steps_per_checkpoint 15000 --tpu hebrew-gpt2-tiny --prompt input.txt 
