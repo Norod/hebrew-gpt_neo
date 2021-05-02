@@ -15,12 +15,13 @@ The Open Super-large Crawled ALMAnaCH coRpus is a huge multilingual corpus obtai
 ### hebrew-gpt_neo-xl 
 
 * Model [configs](./hebrew-gpt_neo-xl/configs) <BR>
-* Will be available on [Huggingface](https://huggingface.co/Norod78/hebrew-gpt_neo-xl) <BR>
+* Available on [Huggingface](https://huggingface.co/Norod78/hebrew-gpt_neo-xl) <BR>
+* A Google Colab Notebook is available [here ](https://colab.research.google.com/github/Norod/hebrew-gpt_neo/blob/main/hebrew-gpt_neo-xl/Norod78_hebrew_gpt_neo_xl_Colab.ipynb) <BR>
 
 ### hebrew-gpt_neo-small
 
 * Model [configs](./hebrew-gpt_neo-small/configs) <BR>
-* Initial chekpoint already available on [Huggingface](https://huggingface.co/Norod78/hebrew-gpt_neo-small) <BR>
+* Available on [Huggingface](https://huggingface.co/Norod78/hebrew-gpt_neo-small) <BR>
 * A Google Colab Notebook is available [here ](https://colab.research.google.com/github/Norod/hebrew-gpt_neo/blob/main/hebrew-gpt_neo-small/Norod78_hebrew_gpt_neo_small_Colab.ipynb) <BR>
 
 ### hebrew-gpt_neo-tiny
