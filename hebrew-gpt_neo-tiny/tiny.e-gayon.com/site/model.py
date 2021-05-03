@@ -34,7 +34,7 @@ def parseText(text):
     else:
         trimmed_string += text + ""
 
-    parsedText = trimmed_string.replace("<|startoftext|>", "").replace("<|endoftext|>", "").replace("  "," ").replace("\n ", "\n")
+    parsedText = trimmed_string.replace("<|startoftext|>", "").replace("<|endoftext|>", "").replace("\r","").replace("\n\n\n", "\n").replace("\n\n", "\n")
     return parsedText
 
 def extend(input_text, max_size=20):
