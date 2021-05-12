@@ -11,6 +11,7 @@ tokenizer = AutoTokenizer.from_pretrained("Norod78/hebrew_poetry-gpt_neo-tiny")
 model = AutoModelForCausalLM.from_pretrained("Norod78/hebrew_poetry-gpt_neo-tiny")
 
 stop_token = "<|endoftext|>"
+new_lines = "\n\n\n"
 
 np.random.seed(None)
 random_seed = np.random.randint(10000,size=1)
@@ -23,18 +24,6 @@ if n_gpu > 0:
     torch.cuda.manual_seed_all(random_seed)
 
 model.to(device)
-
-def parseText(text):
-    trimmed_string = ""
-    regex = r"<\|endoftext\|>"
-    matches = list(re.finditer(regex, text, re.MULTILINE))
-    if len(matches) > 0:
-        trimmed_string += text[0:matches[0].start()] + ""
-    else:
-        trimmed_string += text + ""
-
-    parsedText = trimmed_string.replace("<|startoftext|>", "").replace("<|endoftext|>", "").replace("\r","").replace("\n\n\n", "\n").replace("\n\n", "\n")
-    return parsedText
 
 def extend(input_text, max_size=20):
     if len(input_text) == 0:
@@ -73,6 +62,9 @@ def extend(input_text, max_size=20):
         # Remove all text after the stop token
         text = text[: text.find(stop_token) if stop_token else None]
 
+        # Remove all text after 3 newlines
+        text = text[: text.find(new_lines) if new_lines else None]
+
         # Add the prompt at the beginning of the sequence. Remove the excess text that was used for pre-processing
         total_sequence = (
             input_text + text[len(tokenizer.decode(encoded_prompt[0], clean_up_tokenization_spaces=True)) :]
@@ -80,12 +72,12 @@ def extend(input_text, max_size=20):
 
         generated_sequences.append(total_sequence)
     
-    parsed_text = parseText(total_sequence)
+    parsed_text = total_sequence.replace("<|startoftext|>", "").replace("\r","").replace("\n\n", "\n")
     if len(parsed_text) == 0:
         parsed_text = "שגיאה"
     return parsed_text
 
 if __name__ == "__main__":
     test_text = ''
-    extended = extend(test_text, 120)
+    extended = extend(test_text, 96)
     print(extended)
