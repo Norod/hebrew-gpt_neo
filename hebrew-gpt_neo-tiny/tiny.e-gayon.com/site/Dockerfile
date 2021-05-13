@@ -3,4 +3,5 @@ ADD . /app
 WORKDIR /app
 RUN pip3 install -r requirements.txt
 RUN python3 setup.py
-CMD python3 main.py
+CMD gunicorn main:app -w 1 -b 0.0.0.0:8080
+
