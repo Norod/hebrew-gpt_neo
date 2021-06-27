@@ -21,18 +21,17 @@
     "predict_batch_size": 1,
     "iterations": 100,
     "n_embd": 768,
-    "datasets": [["Hebrew", null, null, null]],
+    "datasets": [["Hebrew", null, null, null], ["Hebrew2", null, "documents_random", null]],
     "model_path": "gs://dadler_gptneo_europe-west4/models/Hebrew_GPT3_SMALL",
     "n_ctx": 2048,
     "n_layer": 12,
     "scale_by_depth": true,
     "scale_by_in": false,
     "attention_types": [[["global"],12]],
-     "mesh_shape": "x:4,y:2",
+      "mesh_shape": "x:4,y:2",
     "layout": "intermediate_expanded:x,heads:x,vocab:n_vocab,memory_length:y,embd:y",
     "activation_function": "gelu",
     "recompute_grad": false,
     "gradient_clipping": 1.0,
     "precision": "bfloat16"
 }
-

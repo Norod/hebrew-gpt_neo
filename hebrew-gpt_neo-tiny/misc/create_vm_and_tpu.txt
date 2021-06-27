@@ -1,6 +1,6 @@
 gcloud compute tpus execution-groups create \
  --name=hebrew-gpt2-tiny \
  --zone=europe-west4-a \
- --tf-version=2.4.0 \
+ --tf-version=2.5.0 \
  --machine-type=n1-standard-1 \
  --accelerator-type=v3-8
