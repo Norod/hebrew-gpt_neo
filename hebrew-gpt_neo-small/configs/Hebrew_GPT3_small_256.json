@@ -21,7 +21,7 @@
     "predict_batch_size": 1,
     "iterations": 100,
     "n_embd": 768,
-    "datasets": [["Hebrew", null, null, null], ["Hebrew2", null, "documents_random", null]],
+    "datasets": [["Hebrew", null, null, null], ["Hebrew2", null, null, null]],
     "model_path": "gs://dadler_gptneo_europe-west4/models/Hebrew_GPT3_SMALL",
     "n_ctx": 2048,
     "n_layer": 12,
