@@ -1,5 +1,5 @@
-transformers==4.6.0
-tokenizers==0.10.2
+transformers==4.8.1
+tokenizers==0.10.3
 flask==1.1.2
 torch
 gunicorn
