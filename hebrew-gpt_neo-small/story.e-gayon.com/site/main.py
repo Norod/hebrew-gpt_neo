@@ -5,7 +5,7 @@ import os
 from flask import Flask, request, send_file
 from model import extend
 
-maxNumOfTokensToExtend = 92
+maxNumOfTokensToExtend = 72
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def robots():
 
 @app.route('/timestamp')
 def checkpoint():
-    return ("20210630-0853")
+    return ("20210701-1243")
     #return send_file('hebrew-gpt_neo-tiny/counter', mimetype='text/plain')
 
 @app.route('/', methods=['GET', 'POST'])

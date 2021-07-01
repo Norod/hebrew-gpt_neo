@@ -27,7 +27,7 @@ model.to(device)
 
 def extend(input_text, max_size=20):
     if len(input_text) == 0:
-        input_text = "\n\nהאיש האחרון בעולם /"
+        input_text = "האיש האחרון בעולם ישב לבד בחדרו, לפתע נשמע נקישה"
 
     encoded_prompt = tokenizer.encode(
     input_text, add_special_tokens=False, return_tensors="pt")
@@ -72,7 +72,7 @@ def extend(input_text, max_size=20):
 
         generated_sequences.append(total_sequence)
     
-    parsed_text = total_sequence.replace("<|startoftext|>", "").replace("\r","").replace("\n\n", "\n")
+    parsed_text = total_sequence.replace("<|startoftext|>", "").replace("\t","").replace("\r","").replace("\n\n", "\n")
     if len(parsed_text) == 0:
         parsed_text = "שגיאה"
     return parsed_text
