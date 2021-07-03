@@ -27,7 +27,7 @@ model.to(device)
 
 def extend(input_text, max_size=20):
     if len(input_text) == 0:
-        input_text = ""
+        input_text = "פעם אחת, לפני שנים ר"
 
     encoded_prompt = tokenizer.encode(
     input_text, add_special_tokens=False, return_tensors="pt")
