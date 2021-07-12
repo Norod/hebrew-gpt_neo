@@ -1,0 +1,10 @@
+
+{
+  "path": "gs://dadler_gptneo_europe-west4/datasets/HebrewBooks/HebrewBooksCorpus*.tfrecords",
+  "eval_path": "gs://dadler_gptneo_europe-west4/datasets/HebrewBooks/HebrewBooksCorpus*.tfrecords",
+  "n_vocab": 50257,
+  "tokenizer_is_pretrained": true,
+  "tokenizer_path": "Norod78/hebrew-gpt_neo-small",
+  "eos_id": 50256,
+  "padding_id": 50257
+}
