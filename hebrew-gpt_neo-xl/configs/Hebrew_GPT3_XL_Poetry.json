@@ -20,7 +20,7 @@
     "predict_batch_size": 1,
     "iterations": 100,
     "n_embd": 2048,
-    "datasets": [["HebrewBooks", null, null, null], ["HebrewStage", null, null, null]],
+    "datasets": [["HebrewBooks", "", null, "chunks", 1.0], ["HebrewStage", "", null, "chunks", 0.5], ["HebrewCC100", "", null, "chunks", 0.25]],
     "model": "GPT",
     "model_path": "gs://dadler_gptneo_europe-west4/models/Hebrew_GPT3_XL_Poetry",    
     "n_ctx": 2048,
