@@ -5,9 +5,18 @@ import argparse
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import os
 
 tokenizer = AutoTokenizer.from_pretrained("Norod78/hebrew_poetry-gpt_neo-small")
 model = AutoModelForCausalLM.from_pretrained("Norod78/hebrew_poetry-gpt_neo-small")
+
+pre_model_path = './hebrew_poetry-gpt_neo-small'
+os.mkdir(pre_model_path)
+
+model.save_pretrained(pre_model_path, save_config=True)
+tokenizer.save_pretrained(pre_model_path)
+tokenizer.save_vocabulary(pre_model_path)
+
 
 prompt_text = "פעם אחת, לפני שנים רבות "
 stop_token = "<|endoftext|>"

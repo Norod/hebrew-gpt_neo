@@ -19,7 +19,7 @@ def robots():
 
 @app.route('/timestamp')
 def checkpoint():
-    return ("20210703-1649")
+    return ("20211005-1844")
     #return send_file('hebrew-gpt_neo-tiny/counter', mimetype='text/plain')
 
 @app.route('/', methods=['GET', 'POST'])

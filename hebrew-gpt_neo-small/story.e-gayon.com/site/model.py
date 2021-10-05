@@ -7,8 +7,10 @@ import numpy as np
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-tokenizer = AutoTokenizer.from_pretrained("Norod78/hebrew_stories-gpt_neo-small")
-model = AutoModelForCausalLM.from_pretrained("Norod78/hebrew_stories-gpt_neo-small")
+pre_model_path = './hebrew_stories-gpt_neo-small'
+
+tokenizer = AutoTokenizer.from_pretrained(pre_model_path)
+model = AutoModelForCausalLM.from_pretrained(pre_model_path)
 
 stop_token = "<|endoftext|>"
 new_lines = "\n\n\n"

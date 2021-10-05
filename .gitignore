@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+hebrew-gpt_neo-small/shira.e-gayon.com/site/hebrew_poetry-gpt_neo-small
+hebrew-gpt_neo-small/story.e-gayon.com/site/hebrew_stories-gpt_neo-small
