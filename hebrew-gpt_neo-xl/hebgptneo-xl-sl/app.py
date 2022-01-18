@@ -42,6 +42,7 @@ def extend(input_text, max_size=20, top_k=50, top_p=0.95):
     top_k=top_k, 
     top_p=top_p, 
     do_sample=True,
+    repetition_penalty=25.0,
     num_return_sequences=1)
 
     # Remove the batch dimension when returning multiple sequences
