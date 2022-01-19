@@ -4,7 +4,8 @@ WORKDIR /app
 RUN pip3 install -U pip
 RUN pip3 install -r requirements.txt
 
-RUN python3 setup.py
+#Better run the following line before building the docker container
+#RUN python3 setup.py
 
 # remember to expose the port your app'll be exposed on.
 EXPOSE 8080
