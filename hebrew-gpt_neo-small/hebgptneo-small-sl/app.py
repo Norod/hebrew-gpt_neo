@@ -9,19 +9,22 @@ import random
 import numpy as np
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import tokenizers
 
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
+#os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-@st.cache(allow_output_mutation=True)
+random.seed(None)
+suggested_text_list = ['פעם אחת, לפני שנים רבות','שלום, קוראים לי דורון ואני','בוקר טוב לכולם','ואז הפרתי את כל כללי הטקס כש']
+
+@st.cache(hash_funcs={tokenizers.Tokenizer: id, tokenizers.AddedToken: id})
 def load_model(model_name):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
     return model, tokenizer
 
-
 def extend(input_text, max_size=20, top_k=50, top_p=0.95):
     if len(input_text) == 0:
-        input_text = "שם היצירה: "
+        input_text = ""
 
     encoded_prompt = tokenizer.encode(
     input_text, add_special_tokens=False, return_tensors="pt")
@@ -39,6 +42,7 @@ def extend(input_text, max_size=20, top_k=50, top_p=0.95):
     top_k=top_k, 
     top_p=top_p, 
     do_sample=True,
+    repetition_penalty=25.0,
     num_return_sequences=1)
 
     # Remove the batch dimension when returning multiple sequences
@@ -71,8 +75,6 @@ def extend(input_text, max_size=20, top_k=50, top_p=0.95):
         parsed_text = "שגיאה"
     return parsed_text
 
-
-
 if __name__ == "__main__":
     st.title("Hebrew GPT Neo (Small)")
 
@@ -84,7 +86,7 @@ if __name__ == "__main__":
     new_lines = "\n\n\n"
 
     np.random.seed(None)
-    random_seed = np.random.randint(10000,size=1)
+    random_seed = np.random.randint(10000,size=1)    
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     n_gpu = 0 if torch.cuda.is_available()==False else torch.cuda.device_count()
@@ -95,24 +97,21 @@ if __name__ == "__main__":
 
     model.to(device)
 
+    text_area = st.text_area("Enter the first few words (or leave blank), tap on \"Generate Text\" below. Tapping again will produce a different result.", 'האיש האחרון בעולם ישב לבד בחדרו כשלפתע נשמעה נקישה')
+
     st.sidebar.subheader("Configurable parameters")
 
-    max_len = st.sidebar.slider("Max-Length", 0, 512, 256,help="The maximum length of the sequence to be generated.")
-    top_k = st.sidebar.slider("Top-K", 0, 100, 50, help="The number of highest probability vocabulary tokens to keep for top-k-filtering.")
-    top_p = st.sidebar.slider("Top-P", 0.0, 1.0, 0.95, help="If set to float < 1, only the most probable tokens with probabilities that add up to top_p or higher are kept for generation.")
+    max_len = st.sidebar.slider("Max-Length", 0, 256, 192,help="The maximum length of the sequence to be generated.")
+    top_k = st.sidebar.slider("Top-K", 0, 100, 40, help="The number of highest probability vocabulary tokens to keep for top-k-filtering.")
+    top_p = st.sidebar.slider("Top-P", 0.0, 1.0, 0.92, help="If set to float < 1, only the most probable tokens with probabilities that add up to top_p or higher are kept for generation.")
 
-    st.markdown(    
-        """Hebrew text generation model based on EleutherAI's gpt-neo. Each was trained on a TPUv3-8 which was made avilable to me via the [TPU Research Cloud Program](https://sites.research.google/trc/). """
-    )
-
-    prompt = "האיש האחרון בעולם ישב לבד בחדרו כשלפתע נשמעה נקישה"
-    text = st.text_area("Enter text", prompt)
-
-    if st.button("Run"):
+    if st.button("Generate Text"):
         with st.spinner(text="Generating results..."):
             st.subheader("Result")
             print(f"device:{device}, n_gpu:{n_gpu}, random_seed:{random_seed}, maxlen:{max_len}, top_k:{top_k}, top_p:{top_p}")
-            result = extend(input_text=text,                         
+            if len(text_area.strip()) == 0:
+                text_area = random.choice(suggested_text_list)
+            result = extend(input_text=text_area,                         
                             max_size=int(max_len),                         
                             top_k=int(top_k),
                             top_p=float(top_p))
@@ -121,7 +120,10 @@ if __name__ == "__main__":
             #<div class="rtl" dir="rtl" style="text-align:right;">
             st.markdown(f"<p dir=\"rtl\" style=\"text-align:right;\"> {result} </p>", unsafe_allow_html=True)
             st.write("\n\nResult length: " + str(len(result)) + " bytes")
-            print(f"\"{result}\"")
+            print(f"\"{result}\"")      
     
-    st.markdown("<footer><hr><p style=\"font-size:12px\">By <a href=\"https://linktr.ee/Norod78\">Doron Adler</a></p></footer> ", unsafe_allow_html=True)
+    st.markdown(    
+        """Hebrew text generation model (125M parameters) based on EleutherAI's gpt-neo architecture. Originally trained on a TPUv3-8 which was made avilable to me via the [TPU Research Cloud Program](https://sites.research.google/trc/)."""
+    )
 
+    st.markdown("<footer><hr><p style=\"font-size:14px\">Enjoy</p><p style=\"font-size:12px\">Created by <a href=\"https://linktr.ee/Norod78\">Doron Adler</a></p></footer> ", unsafe_allow_html=True)
