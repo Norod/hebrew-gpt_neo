@@ -1,0 +1,4 @@
+streamlit
+transformers
+tokenizers
+torch
